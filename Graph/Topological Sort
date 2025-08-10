@@ -1,3 +1,5 @@
+Valid only for DAG -
+
 1. DFS : Sirf dfs call ke end me stk.push likhna he 
 
 void dfs(int node , vector<int>&visited,vector<vector<int>>&adjList, stack<int>&stk){
@@ -8,4 +10,24 @@ void dfs(int node , vector<int>&visited,vector<vector<int>>&adjList, stack<int>&
       stk.push(node);
   }
 
-2. BFS
+2. BFS / Kahn's Algorithm
+
+calculate indegree in an array for each node, then -
+
+        queue<int> q;
+        for(int i=0; i<indegree.size(); i++){
+            if(indegree[i]==0)      q.push(i);
+        }
+        vector<int> ans;
+        while(!q.empty()){
+            int node = q.front();
+            ans.push_back(node);
+            q.pop();
+            for(auto adj : adjList[node]){
+                indegree[adj]--;
+                if(indegree[adj]==0)        q.push(adj);
+            }
+        }
+        return ans;
+
+
