@@ -1,0 +1,11 @@
+1. DFS : Sirf dfs call ke end me stk.push likhna he 
+
+void dfs(int node , vector<int>&visited,vector<vector<int>>&adjList, stack<int>&stk){
+      visited[node]=1;
+      for(auto adj : adjList[node]){
+          if(!visited[adj])       dfs(adj,visited,adjList,stk);
+      }
+      stk.push(node);
+  }
+
+2. BFS
