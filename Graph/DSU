@@ -1,3 +1,39 @@
+-----------------------------------UNION BY SIZE------------------------------------
+
+class DisjointSet{
+	vector<int> size,parent;
+	public : 
+	DisjointSet(int n){
+		size.resize(n+1,1);
+		parent.resize(n+1);
+		for(int i=0; i<n+1; i++)		parent[i]=i;
+	}
+	
+	int findUPar(int node){
+		if(node == parent[node])			return node;
+		return parent[node] = findUPar(parent[node]);
+	}
+	
+	void unionBySize(int u,int v){
+		int ult_u = findUPar(u);
+		int ult_v = findUPar(v);
+		if(ult_v == ult_u)				return;
+		if(size[ult_v] > size[ult_u]){
+			parent[ult_u] = ult_v;
+			size[ult_v] += size[ult_u];
+		}
+		else{
+			parent[ult_v] = ult_u;
+			size[ult_u] += size[ult_v];
+		}
+	}
+};
+
+
+
+
+
+-----------------------------------UNION BY RANK------------------------------------
 class DisjointSet{
 	vector<int> parent,rank;
 	public:
